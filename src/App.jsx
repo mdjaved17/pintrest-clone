@@ -1,5 +1,5 @@
 import React from 'react'
-import { fetchPhotos } from './api/mediaApi'
+import { fetchGIF, fetchPhotos, fetchVideos } from './api/mediaApi'
 
 const App = () => {
   return (
@@ -7,7 +7,15 @@ const App = () => {
       <button onClick={async()=>{
         const data= await fetchPhotos('dog');
         console.log(data.results);
-      }} className='p-3 bg-amber-400'> Get Data</button>
+      }} className='p-3 bg-amber-400 m-5'> Get Photos</button>
+      <button onClick={async()=>{
+        const data= await fetchVideos('dog');
+        console.log(data.videos);
+      }} className='p-3 bg-amber-400 m-5'> Get Videos</button>
+      <button onClick={async()=>{
+        const data= await fetchGIF('dog');
+        console.log(data.results);
+      }} className='p-3 bg-amber-400'> Get GIF</button>
     </div>
   )
 }
