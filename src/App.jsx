@@ -1,21 +1,9 @@
-import React from 'react'
-import { fetchGIF, fetchPhotos, fetchVideos } from './api/mediaApi'
+import SearchBar from "./components/SearchBar"
 
 const App = () => {
   return (
     <div className=' h-screen w-full bg-gray-950 text-white'>
-      <button onClick={async()=>{
-        const data= await fetchPhotos('dog');
-        console.log(data.results);
-      }} className='p-3 bg-amber-400 m-5'> Get Photos</button>
-      <button onClick={async()=>{
-        const data= await fetchVideos('dog');
-        console.log(data.videos);
-      }} className='p-3 bg-amber-400 m-5'> Get Videos</button>
-      <button onClick={async()=>{
-        const data= await fetchGIF('dog');
-        console.log(data.results);
-      }} className='p-3 bg-amber-400'> Get GIF</button>
+      <SearchBar />
     </div>
   )
 }
