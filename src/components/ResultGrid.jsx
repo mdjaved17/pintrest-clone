@@ -19,6 +19,7 @@ const ResultGrid = () => {
     if (!query) return;
     const getData = async () => {
       try {
+        dispatch(setLoading(true));
         let data = [];
         if (activeTab == "photos") {
           let response = await fetchPhotos(query);
@@ -28,6 +29,7 @@ const ResultGrid = () => {
             title: item.alt_description,
             image: item.urls.small,
             src: item.urls.full,
+            url:item.links.html
           }));
         }
         if (activeTab == "videos") {
@@ -38,6 +40,7 @@ const ResultGrid = () => {
             title: item.user.name || "video",
             image: item.image,
             src: item.video_files[0].link,
+            url: item.url
           }));
         }
         if (activeTab === "GIF") {
@@ -47,8 +50,8 @@ const ResultGrid = () => {
             id: item.id,
             type: "GIF",
             title: item.title || "GIF",
-            image: item.media_formats.tinygif.url
-
+            image: item.media_formats.tinygif.url,
+            url:item.url
           }));
         }
         dispatch(setResults(data));
