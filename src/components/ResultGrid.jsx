@@ -45,7 +45,6 @@ const ResultGrid = () => {
         }
         if (activeTab === "GIF") {
           let response = await fetchGIF(query);
-          console.log(response)
           data = response.results.map((item) => ({
             id: item.id,
             type: "GIF",
@@ -60,7 +59,7 @@ const ResultGrid = () => {
       }
     };
     getData();
-  }, [query, activeTab]);
+  }, [query, activeTab, dispatch]);
 
   if(error) return <h1>Error</h1>
   if(loading) return <h1>Loading...</h1>

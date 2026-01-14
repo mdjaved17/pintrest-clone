@@ -1,16 +1,28 @@
-import React from "react";
-import { fetchPhotos, fetchVideos, fetchGIF } from "../api/mediaApi";
-const ResultCard = (props) => {
+import { FiDownload } from "react-icons/fi";
+
+
+const ResultCard = ({item}) => {
+
+  const addToCollection= (item)=>{
+    const oldData=JSON.parse(localStorage.getItem('collection')) || [];
+    const newData= [...oldData, item];
+    localStorage.setItem('collection', JSON.stringify(newData));
+    // console.log(oldData);
+    
+  }
+
   return (
-    <div className="h-72 relative gap-3 w-60 bg-white rounded">
-      <a className="h-full" href={props.item.url}>
-        {props.item.type == 'photos' ? <img className="w-full h-full object-cover" src={props.item.image} alt="" />: ''}
-        {props.item.type == 'videos' ? <video className="w-full h-full object-cover" autoPlay loop muted src={props.item.src}></video>: ''}
-        {props.item.type == 'GIF' ? <img className="w-full h-full object-cover" src={props.item.image} alt="" /> : ''}
+    <div className="h-72 relative gap-3 w-60 bg-white rounded-lg overflow-hidden">
+      <a className="h-full" href={item.url}>
+        {item.type == 'photos' ? <img className="w-full h-full object-cover" src={item.image} alt="" />: ''}
+        {item.type == 'videos' ? <video className="w-full h-full object-cover" autoPlay loop muted src={item.src}></video>: ''}
+        {item.type == 'GIF' ? <img className="w-full h-full object-cover" src={item.image} alt="" /> : ''}
         </a>
         <div id="btn" className="w-full px-3 py-2 absolute bottom-0 flex justify-between items-center">
-            <h2 className="text-sm font-semibold">{props.item.title}</h2>
-            <button className="bg-amber-400 px-3 py-2 rounded-full">save</button>
+            <h2 className="text-sm font-semibold">{item.title}</h2>
+            <button onClick={()=>{
+              addToCollection(item)
+            }} className="bg-blue-500 px-3 py-2 rounded-full cursor-pointer active:scale-95"><FiDownload /></button>
         </div>
     </div>
 
