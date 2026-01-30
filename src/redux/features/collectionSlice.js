@@ -29,4 +29,4 @@ export const{
     removeCollection,
     clearCollection, 
 }= collectionSlice.actions;
-export default collectionSlice;
+export default collectionSlice.reducer;
